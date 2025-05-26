@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block title %}Add Data{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <div class="card shadow">
+            <div class="card-body">
+                <h2 class="card-title text-center mb-4">Add Encrypted Data</h2>
+                
+                <form method="POST">
+                    <!-- Text Data Section -->
+                    <div class="mb-4">
+                        <h5>Text Data</h5>
+                        <div class="mb-3">
+                            <label for="text_data" class="form-label">Enter text to encrypt:</label>
+                            <textarea class="form-control" id="text_data" name="text_data" rows="5"></textarea>
+                        </div>
+                    </div>
+                    
+                    <div class="d-grid gap-2">
+                        <button type="submit" class="btn btn-primary">Encrypt and Save</button>
+                        <a href="{{ url_for('main.dashboard') }}" class="btn btn-secondary">Cancel</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

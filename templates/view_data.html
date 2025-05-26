@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% block title %}View Data{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <div class="card shadow">
+            <div class="card-body">
+                <h2 class="card-title text-center mb-4">View Encrypted Data</h2>
+                
+                <div class="mb-4">
+                    <h5>Encrypted Data:</h5>
+                    <div class="p-3 bg-light rounded">
+                        <code>{{ data_entry.encrypted_data[:100] }}{% if data_entry.encrypted_data|length > 100 %}...{% endif %}</code>
+                        <small class="text-muted d-block mt-1">(truncated for security)</small>
+                    </div>
+                </div>
+                
+                {% if decrypted_data %}
+                    <div class="mb-4">
+                        <h5>Decrypted Data:</h5>
+                        <div class="p-3 bg-light rounded">
+                            <code>{{ decrypted_data }}</code>
+                        </div>
+                    </div>
+                {% else %}
+                    <form method="POST" id="decryptForm">
+                        <button type="submit" class="btn btn-primary" id="decryptBtn">
+                            <span id="btnText">Decrypt Data</span>
+                            <span id="spinner" class="spinner-border spinner-border-sm d-none" role="status"></span>
+                        </button>
+                    </form>
+                {% endif %}
+                
+                <a href="{{ url_for('main.dashboard') }}" class="btn btn-secondary mt-3">Back to Dashboard</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% block scripts %}
+<script>
+document.getElementById('decryptForm').onsubmit = function() {
+    document.getElementById('btnText').classList.add('d-none');
+    document.getElementById('spinner').classList.remove('d-none');
+    document.getElementById('decryptBtn').disabled = true;
+};
+</script>
+{% endblock %}
+{% endblock %}
